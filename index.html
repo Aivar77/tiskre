@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Slider</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Timestamped Image Slider</h1>
+    <div>
+        <img id="image" src="/static/images/your_default_image.jpg" alt="Image">
+    </div>
+    <input type="range" id="slider" min="0" max="10" step="1" oninput="updateImage()">
+    
+    <script>
+        function updateImage() {
+            const value = document.getElementById('slider').value;
+            // Make an API request to get the image URL based on slider value
+            $.get(`/get_image?value=${value}`, function(data) {
+                // Update the image src attribute with the new URL
+                document.getElementById('image').src = data.image_url;
+            });
+        }
+    </script>
+</body>
+</html>
